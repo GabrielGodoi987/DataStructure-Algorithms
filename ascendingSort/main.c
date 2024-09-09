@@ -3,11 +3,12 @@
 
 int main(void)
 {
-    int n, numeros;
+    int n, numeros, j = 0;
     puts("Digite o tamanho da sequencia:");
     scanf("%d", &n);
     Pilha a = pilha(n * sizeof(int));
     Pilha b = pilha(n * sizeof(int));
+    int length = sizeof(b->item) / sizeof(b->item[0]);
 
     for (int i = 0; i < n; i++)
     {
@@ -18,20 +19,27 @@ int main(void)
 
     printf("\n");
 
-    int length = sizeof(b->item) / sizeof(b->item[0]);
-    int aux = 0;
-    for(int i = 0; i <= length; i++){
-        aux = b->item[i];
-        if(aux < b->item[i + 1]){
-          empilha(b->item[i + 1], a);
+    do
+    {
+        if (j != length)
+        {
+            printf("%d proximo número %d\n", b->item[j], b->item[j + 1]);
+            if (b->item[j] > b->item[j + 1])
+            {
+                empilha(b->item[j], a);
+                printf("%d\n", b->item[j]);
+                j++;
+            }
         }
+    } while (j != length);
+
+        printf("\n");
+
+    for (int i = 0; i <= length; i++)
+    {
+        printf("%d\n", a->item[i]);
     }
 
-    for(int j = 0; j <= length; j++){
-       printf("%d\n", b->item[j]);
-    }
-
-
-    printf("%d\n", topo(a));
+    printf("%d", topo(a));
     return 0;
 }
