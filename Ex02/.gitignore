@@ -1,0 +1,6 @@
+# ignora a pasta .vscode
+.vscode
+
+
+#ignora a pasta doc
+doc

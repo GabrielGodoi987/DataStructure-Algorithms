@@ -21,7 +21,7 @@ int main(void)
         int k = topo(a);
         desempilha(a);
 
-        while (!vaziap(b) && topo(b) < k)
+        while (!vaziap(b) && topo(b) > k)
         {
             empilha(topo(b), a);
             desempilha(b);
@@ -35,10 +35,10 @@ int main(void)
     puts("\nSequência ordenada:");
     for (int i = 0; i < n; i++)
     {
-        printf("%d\n", a->item[i]);
+        printf("%d\n", b->item[i]);
     }
 
-    printf("o topo dessa merda é %d\n", topo(b));
+    printf("topo da pilha %d\n", topo(b));
 
     return 0;
 }
