@@ -1,0 +1,4 @@
+# ignorar pastas criadas pelo vscode quando compilamos código em C ansi
+.vscode
+
+doc
