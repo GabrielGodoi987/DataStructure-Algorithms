@@ -8,6 +8,9 @@ int main(void)
   char str[LIMITSTRING];
   puts("Digite o seu nome ou uma frase");
   fgets(str, LIMITSTRING, stdin);
+
+  str[strcspn(str, "\n")] = '\0';
+
   char *pch;
   int length = strlen(str), j = 0, k = 0;
   Pilha A = pilha(LIMITSTRING);
@@ -20,18 +23,21 @@ int main(void)
     {
       empilha(pch[i], B);
     }
+
     while (!vaziap(B))
     {
-      empilha(topo(B), A);
-      desempilha(B);
-      //printf("%c", topo(A));
+      printf("%c", desempilha(B));
     }
-    if (!vaziap(A))
-      empilha(" ", A);
+
     pch = strtok(NULL, " ,.-");
+    printf(" ");
   }
 
-  printf("%c", topo(A));
+  while (!vaziap(A))
+  {
+    printf("topo de A agora é %c\n", topo(A));
+    desempilha(A);
+  }
 
   return 0;
 }
