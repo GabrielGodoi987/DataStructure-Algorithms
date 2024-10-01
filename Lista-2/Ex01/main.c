@@ -22,45 +22,6 @@ int prio(char digit)
     return -1;
 }
 
-// char *postfix(char *e)
-// {
-//     char s[lengthMax];
-//     int j = 0;
-//     Pilha p = pilha(lengthMax);
-
-//     for (int i = 0; e[i]; i++)
-//     {
-//         if (e[i] == '(')
-//             empilha('(', p);
-//         else if (isdigit(e[i]))
-//             s[j++] = e[i];
-//         else if (strchr("+-/*", e[i]))
-//         {
-//             while (!vaziap(p) && prio(topo(p)) >= prio(e[i]))
-//             {
-//                 s[j++] = desempilha(p);
-//             }
-//             empilha(e[i], p);
-//         }
-//         else if (e[i] == ')')
-//         {
-//             while (topo(p) != '(')
-//             {
-//                 s[j++] = desempilha(p);
-//             }
-//             desempilha(p);
-//         }
-//     }
-//     while (!vaziap(p))
-//     {
-//         s[j++] = desempilha(p);
-//     }
-
-//     s[j] = '\0';
-
-//     return s;
-// }
-
 char *postfix(char *e)
 {
     static char s[256];
@@ -94,11 +55,58 @@ char *postfix(char *e)
     return s;
 }
 
+int eval(char *str)
+{
+    int value = 0;
+    Pilha p = pilha(lengthMax);
+    for (int i = 0; i < strlen(str); i++)
+    {
+        if (isdigit(str[i]))
+        {
+            empilha(str[i] - '0', p);
+        }
+        else if (strchr("+-/*", str[i]))
+        {
+            int n2 = desempilha(p);
+            int n1 = desempilha(p);
+            if (str[i] == '*')
+            {
+                value = n1 * n2;
+                empilha(value, p);
+                value = 0;
+            }
+            else if (str[i] == '/')
+            {
+                value = n1 / n2;
+                empilha(value, p);
+                value = 0;
+            }
+            else if (str[i] == '-')
+            {
+                value = n1 - n2;
+                empilha(value, p);
+                value = 0;
+            }
+            else if (str[i] == '+')
+            {
+                value = n1 + n2;
+                empilha(value, p);
+                value = 0;
+            }
+        }
+    }
+
+    return desempilha(p);
+    destroip(&p);
+}
+
 int main(void)
 {
     char e[lengthMax] = "(2*3)+(8/4)";
 
     char *val = postfix(e);
     printf("Posfixa: %s\n", val);
+
+    printf("posfixa resolvida %d\n", eval(val));
     return 0;
 }
