@@ -84,37 +84,56 @@ int verfifyOperation(char *o)
     {
         if (strchr("FV", o[i]))
         {
-            empilha(o[i], p);
+            empilha(booleans(o[i]), p);
         }
         else
         {
-            int n2 = desempilha(p);
-            int n1 = desempilha(p);
             switch (o[i])
             {
-                
+            case '!':
+            {
+                int n = desempilha(p);
+                empilha(!n, p);
+            }
+            break;
+            case '&':
+            {
+                int a = desempilha(p);
+                int b = desempilha(p);
+                empilha(a & b, p); 
+            }
+            break;
+            case '|':
+            {
+                int a = desempilha(p);
+                int b = desempilha(p);
+                empilha(a | b, p);
+            }
+            break;
             }
         }
     }
+    int result = desempilha(p);
+    destroip(&p);
+    return result;
 }
 
 int main(void)
 {
-    char operation[maxLength] = "(!F)|(F&V)";
-    // puts("Digite uma operação lógica com valores boleanos (V ou F) e operadores lógicos(!, &, |)");
-    // fgets(operation, maxLength, stdin);
+    char operation[maxLength];
+    puts("Digite uma operação lógica com valores boleanos (V ou F) e operadores lógicos(!, &, |)");
+    fgets(operation, maxLength, stdin);
 
-    // Converte para letras maiúsculas
     for (int i = 0; i < strlen(operation); i++)
     {
         operation[i] = toupper(operation[i]);
     }
 
-    // A variável 'o' deve ser do tipo 'char*' para receber uma string.
+
     char *o = postfix(operation);
 
     // Imprime a expressão pós-fixa
-    printf("valor posfixa = %s\n", o);
+    printf("valor posfixa = %s\n", strrev(o));
     printf("////////////////////////////\n");
 
     printf("final value teste = %d\n", verfifyOperation(o));
