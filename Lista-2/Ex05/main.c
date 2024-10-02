@@ -68,32 +68,7 @@ char *postfix(char *str)
     destroip(&p);
     return s;
 }
-// pegar a posfixa e inverter a sua cadeia de caracteres e retorná-los
-char *_strrev(char *str)
-{
-    //                 topo
-    //[2][3][*][8][4][/][+]
-    // adicione o topo da pilha a um array de caracteres criado
-    // após isso desempilhe cada valor adicionado
-    int length = strlen(str);
-    Pilha p = pilha(length);
-    char value[length];
-    int j = 0;
 
-    for (int i = 0; i < length; i++)
-    {
-        empilha(str[i], p);
-    }
-
-    while (!vaziap(p))
-    {
-        str[j] = topo(p);
-        desempilha(p);
-        j++;
-    }
-
-    return str;
-}
 
 // criar uma função para que possamos testar a operação e ver qual o seu valor
 int valPre(char e)
