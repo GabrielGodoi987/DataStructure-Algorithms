@@ -47,15 +47,18 @@ Aqui você encontrará todos os exercícios práticos que venho desenvolvendo na
 
 
 ## 📂 Estrutura do Projeto
+
+```bash
 /
 ├── C/
-│   ├── pilhas/
-│   ├── filas/
-│   ├── listas/
-│   └── outros/
+│   ├── Pilhas/
+│   ├── Filas/
+│   ├── Listas/
+│   └── Outros/
 ├── Java/
-│   ├── pilhas/
-│   ├── filas/
-│   ├── listas/
-│   └── outros/
+│   ├── Pilhas/
+│   ├── Filas/
+│   ├── Listas/
+│   └── Outros/
 └── README.md
+
